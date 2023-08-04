@@ -14,15 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-#       - name: Install Trivy
-#         run: |
-#           #wget wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy
-#           #chmod +x trivy
-#           #sudo mv trivy /usr/local/bin/
-#           sudo apt update
-#           sudo apt install snapd
-#           sudo snap install trivy
-
       - name: Build Docker image  # Modify this step to build your Docker image
         run: docker build -t python-trivy-test:latest .
         
@@ -37,16 +28,11 @@ jobs:
            vuln-type: 'os,library'
            output: 'python.sarif'
            
-           
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         if: always()
         with:
           sarif_file: 'python.sarif'
           token: ${{ secrets.GITHUB_TOKEN }}
 
-
-#       - name: Scan Docker image with Trivy
-#         run: |
-#           sudo trivy image python-trivy-test:latest
 
