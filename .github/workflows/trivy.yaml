@@ -31,9 +31,10 @@ jobs:
         with:
            image-ref: python-trivy-test:latest
            security-checks: 'vuln,secret,config'
-           format: 'sarif'
+           format: 'table'
            output: 'trivy-image-results.sarif'
            severity: 'CRITICAL,HIGH'
+
 
 #       - name: Scan Docker image with Trivy
 #         run: |
