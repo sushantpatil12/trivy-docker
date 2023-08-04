@@ -18,6 +18,6 @@ jobs:
         run: docker build -t python-trivy-test:latest .
 
       - name: Scan Docker image with Trivy and upload results to Code Scanning
-        uses: aquasecurity/trivy-action@v1
+        uses: aquasecurity/trivy-action@v0
         with:
           image-ref: python-trivy-test:latest
