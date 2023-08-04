@@ -33,5 +33,6 @@ jobs:
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
+          token: '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'
 
 
