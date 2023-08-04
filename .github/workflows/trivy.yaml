@@ -16,9 +16,12 @@ jobs:
 
       - name: Install Trivy
         run: |
-          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy
-          chmod +x trivy
-          sudo mv trivy /usr/local/bin/
+          #wget wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy
+          #chmod +x trivy
+          #sudo mv trivy /usr/local/bin/
+          sudo apt update
+          sudo apt install snapd
+          sudo snap install trivy
 
       - name: Build Docker image  # Modify this step to build your Docker image
         run: docker build -t python-trivy-test:latest .
