@@ -28,5 +28,5 @@ jobs:
 
       - name: Scan Docker image with Trivy
         run: |
-          docker run --rm -v $PWD:/workdir -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest python-trivy-test:latest
+          sudo trivy image python-trivy-test:latest
 
