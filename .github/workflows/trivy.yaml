@@ -14,19 +14,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Trivy
-        run: |
-          #wget wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy
-          #chmod +x trivy
-          #sudo mv trivy /usr/local/bin/
-          sudo apt update
-          sudo apt install snapd
-          sudo snap install trivy
+#       - name: Install Trivy
+#         run: |
+#           #wget wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy
+#           #chmod +x trivy
+#           #sudo mv trivy /usr/local/bin/
+#           sudo apt update
+#           sudo apt install snapd
+#           sudo snap install trivy
 
       - name: Build Docker image  # Modify this step to build your Docker image
         run: docker build -t python-trivy-test:latest .
+        
+      - name: Image Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+           image-ref: python-trivy-test:latest
+           security-checks: 'vuln,secret,config'
+           format: 'sarif'
+           output: 'trivy-image-results.sarif'
+           severity: 'CRITICAL,HIGH'
 
-      - name: Scan Docker image with Trivy
-        run: |
-          sudo trivy image python-trivy-test:latest
+#       - name: Scan Docker image with Trivy
+#         run: |
+#           sudo trivy image python-trivy-test:latest
 
