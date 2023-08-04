@@ -43,6 +43,7 @@ jobs:
         if: always()
         with:
           sarif_file: 'python.sarif'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
 
 #       - name: Scan Docker image with Trivy
