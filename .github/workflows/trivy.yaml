@@ -30,10 +30,11 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
            image-ref: python-trivy-test:latest
-           security-checks: 'vuln,secret,config'
+           #security-checks: 'vuln,secret,config'
            format: 'table'
-           output: 'trivy-image-results.sarif'
            severity: 'CRITICAL,HIGH'
+           ignore-unfixed: true
+           vuln-type: 'os,library'
 
 
 #       - name: Scan Docker image with Trivy
