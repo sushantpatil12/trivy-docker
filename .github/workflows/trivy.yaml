@@ -26,13 +26,12 @@ jobs:
            severity: 'CRITICAL,HIGH'
            ignore-unfixed: true
            vuln-type: 'os,library'
-           output: 'python.sarif'
+           output: 'trivy-results.sarif'
            
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         if: always()
         with:
-          sarif_file: 'python.sarif'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          sarif_file: 'trivy-results.sarif'
 
 
