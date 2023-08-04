@@ -31,10 +31,18 @@ jobs:
         with:
            image-ref: python-trivy-test:latest
            #security-checks: 'vuln,secret,config'
-           format: 'table'
+           format: 'sarif'
            severity: 'CRITICAL,HIGH'
            ignore-unfixed: true
            vuln-type: 'os,library'
+           output: 'python.sarif'
+           
+           
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'python.sarif'
 
 
 #       - name: Scan Docker image with Trivy
